@@ -35,7 +35,6 @@ SHARED_APPS = (
     'master',
     'django_tenants',
     'polymorphic',
-    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -45,7 +44,6 @@ SHARED_APPS = (
 TENANT_APPS = (
     'users',
     'tenants',
-    'django.contrib.admin',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
 )

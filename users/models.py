@@ -17,30 +17,16 @@ class UserManager(PolymorphicManager, BaseUserManager):
         return user
     
     def create_superuser(self, login, password):
-        return self.create_user(login, password, is_admin=True)
+        return self.create_user(login, password)
     
 
 
 class User(PolymorphicModel, AbstractBaseUser):
 
     login = models.SlugField(max_length=254, unique=True)
-    is_admin = models.BooleanField(default=False)
 
     USERNAME_FIELD = 'login'
     REQUIRED_FIELDS = ()
 
     objects = UserManager()
     
-    def has_perm(self, perm, obj=None):
-        return self.is_admin
-
-    def has_module_perms(self, app_label):
-        return self.is_admin
-
-    @property
-    def is_staff(self):
-        return self.is_admin
-
-    @property
-    def is_superuser(self):
-        return self.is_admin
