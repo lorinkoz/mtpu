@@ -20,26 +20,43 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '-$3fk+t#ku*ggo0k95$ds_9oom#4vlgr@6ffpe7)%d@l5_gi#4'
+SECRET_KEY = os.environ['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [os.environ['BASE_DOMAIN']]
 
 
 # Application definition
 
-INSTALLED_APPS = [
+SHARED_APPS = (
+    'users',
+    'master',
+    'django_tenants',
+    'polymorphic',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
-    'django.contrib.messages',
     'django.contrib.staticfiles',
-]
+)
+
+TENANT_APPS = (
+    'users',
+    'tenants',
+    'django.contrib.admin',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+)
+
+INSTALLED_APPS = \
+    list(SHARED_APPS) +\
+    [app for app in TENANT_APPS if app not in SHARED_APPS]
+
 
 MIDDLEWARE = [
+    'django_tenants.middleware.TenantMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -49,7 +66,12 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'mtpu.urls'
+ROOT_URLCONF = 'tenants.urls'
+PUBLIC_SCHEMA_URLCONF = 'master.urls'
+
+TENANT_MODEL = 'master.Tenant'
+TENANT_DOMAIN_MODEL = 'master.Domain'
+AUTH_USER_MODEL = 'users.User'
 
 TEMPLATES = [
     {
@@ -74,12 +96,14 @@ WSGI_APPLICATION = 'mtpu.wsgi.application'
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
+    'default': {}
 }
 
+import dj_database_url
+
+DATABASES['default'] = dj_database_url.config(engine='django_tenants.postgresql_backend', conn_max_age=600)
+
+DATABASE_ROUTERS = ('django_tenants.routers.TenantSyncRouter',)
 
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
