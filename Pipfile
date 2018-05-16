@@ -9,6 +9,7 @@ django-tenants = "*"
 django-polymorphic = "*"
 dj-database-url = "*"
 gunicorn = "*"
+django-crispy-forms = "*"
 
 [requires]
 python_version = "3.5"
