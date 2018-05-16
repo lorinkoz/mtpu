@@ -4,6 +4,8 @@ from django.db.models import Case, When, Value, Max
 
 from django_tenants.models import TenantMixin, DomainMixin
 
+from users.models import User
+
 
 class TenantManager(models.Manager):
 
@@ -35,3 +37,9 @@ class Domain(DomainMixin):
 
     def __str__(self):
         return self.domain
+
+
+class MasterUser(User):
+    
+    is_admin = models.BooleanField(default=False)
+    
