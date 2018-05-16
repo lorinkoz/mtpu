@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load crispy_forms_filters %}
+{% block body %}
+<h1 class="page-header">
+    Welcome!<br/>
+    <small>
+        You are at the root of
+        <span class="text-primary">{{ request.tenant.domains.first }}</span>
+    </small>
+</h1>
+<p>
+    <a href="{% url 'login' %}" class="btn btn-primary btn-lg" role="button">Log in</a>
+    <a href="{% url 'signup' %}" class="btn btn-primary btn-lg" role="button">Sign up</a>
+</p>
+{% endblock body %}

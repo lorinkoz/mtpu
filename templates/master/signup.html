@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load crispy_forms_filters %}
+{% block body %}
+<h2 class="page-header">
+    Sign up at <span class="text-primary">{{ request.tenant.domains.first }}</span>
+    <br><small>You will see all tenants, but you won't be able to change them</small>
+</h2>
+<form method="POST" action=".">
+    {% csrf_token %}
+    <div class="row">
+        <div class="col-md-4">
+            {{ form|crispy }}
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary btn-lg">
+        Sign up
+    </button>
+</form>
+{% endblock body %}

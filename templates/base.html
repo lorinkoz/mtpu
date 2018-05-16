@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>MTPU</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="{% static 'bootstrap.min.css' %}" rel="stylesheet" type="text/css" />
+    </head>
+    <body>
+        <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#collapsible-nav">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="/">
+                        {{ request.tenant.domains.first }}
+                    </a>
+                </div>
+                <div class="collapse navbar-collapse" id="collapsible-nav">
+                    {% if request.user.is_authenticated %}
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="#" onclick="document.getElementById('logout-form').submit()">Log out</a></li>
+                    </ul>
+                    {% endif %}
+                </div>
+            </div>
+        </nav>
+        <div class="container" style="margin-top:40px">
+        {% block body %}
+        {% endblock body %}
+        </div>
+        <form id="logout-form" method="post" action="{% url 'logout' %}">
+            {% csrf_token %}
+        </form>
+        <script src="{% static 'bootstrap.min.js' %}"></script>
+    </body>
+</html>

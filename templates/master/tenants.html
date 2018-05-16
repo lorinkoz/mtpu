@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block body %}
+<h2 class="page-header">
+    Tenants
+    <br><small>These are all the tenants we have so far.</small>
+</h2>
+<table class="table table-striped table-hover">
+    <thead>
+        <tr>
+            <th>Tenant</th>
+            <th>Domain</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for tenant in object_list %}
+        <tr>
+            <td>{{ tenant.schema_name }}</td>
+            <td>{{ tenant.domains.first }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock body %}
