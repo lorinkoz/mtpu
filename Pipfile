@@ -8,6 +8,7 @@ django = "*"
 django-tenants = "*"
 django-polymorphic = "*"
 dj-database-url = "*"
+gunicorn = "*"
 
 [requires]
 python_version = "3.5"
