@@ -10,6 +10,7 @@ django-polymorphic = "*"
 dj-database-url = "*"
 gunicorn = "*"
 django-crispy-forms = "*"
+whitenoise = "*"
 
 [requires]
 python_version = "3.5"
