@@ -26,8 +26,7 @@ class HomePage(FormView):
         tenant.save()
         tenant_domain = models.Domain(domain=domain, tenant=tenant)
         tenant_domain.save()
-        self.request.session['success'] = [domain, str(tenant.activation_key)]
-        return super().form_valid(form)
+        return redirect('//{}'.format(domain))
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
