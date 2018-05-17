@@ -7,7 +7,7 @@
         <link href="{% static 'bootstrap/bootstrap.min.css' %}" rel="stylesheet" type="text/css" />
     </head>
     <body>
-        <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <nav class="navbar navbar-{% if request.tenant.schema_name == 'public' %}inverse{% else %}default{% endif %} navbar-fixed-top" role="navigation">
             <div class="container">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#collapsible-nav">
