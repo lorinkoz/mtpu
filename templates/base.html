@@ -25,6 +25,9 @@
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="#" onclick="document.getElementById('logout-form').submit()">Log out</a></li>
                     </ul>
+                    <p class="navbar-text navbar-right">
+                        Signed in as {{ request.user.display_name }}
+                    </p>
                     {% endif %}
                 </div>
             </div>

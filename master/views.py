@@ -1,4 +1,5 @@
 from django.contrib.auth import login, logout
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
 from django.urls import reverse, reverse_lazy
 from django.views.generic import View, TemplateView, FormView, ListView, DeleteView
@@ -9,7 +10,7 @@ from users import forms
 
 class HomePage(TemplateView):
     template_name = 'master/home.html'
-
+    
 
 class LogInPage(FormView):
     form_class = forms.LoginForm
@@ -47,6 +48,6 @@ class SignUpPage(FormView):
         return super().form_valid(form)
 
 
-class TenantList(ListView):
-    model = models.Tenant
+class TenantList(LoginRequiredMixin, ListView):
+    queryset = models.Tenant.objects.exclude(schema_name='public')
     template_name = 'master/tenant_list.html'

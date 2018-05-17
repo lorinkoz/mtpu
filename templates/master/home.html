@@ -8,8 +8,20 @@
         <span class="text-primary">{{ request.tenant.domains.first }}</span>
     </small>
 </h1>
-<p>
-    <a href="{% url 'login' %}" class="btn btn-primary btn-lg" role="button">Log in</a>
-    <a href="{% url 'signup' %}" class="btn btn-primary btn-lg" role="button">Sign up</a>
-</p>
+<div class="row">
+    <div class="col-md-5">
+        <p class="lead">
+            This is the <mark>master</mark> tenant, where you can acquire your private space with isolated users.
+            However since you want to know how does it feel to be a <mark>master</mark> user (and not just because we are nice,)
+            we're gonna let you sign up here as well.
+        </p>
+        <p>
+            <a href="{% url 'login' %}" class="btn btn-primary btn-lg" role="button">Log in</a>
+            <a href="{% url 'signup' %}" class="btn btn-primary btn-lg" role="button">Sign up</a>
+            {% if request.user.is_authenticated %}
+                <a href="{% url 'tenants' %}" class="btn btn-default btn-lg" role="button">View tenants</a>
+            {% endif %}
+        </p>
+    </div>
+</div>
 {% endblock body %}

@@ -73,6 +73,8 @@ TENANT_MODEL = 'master.Tenant'
 TENANT_DOMAIN_MODEL = 'master.Domain'
 AUTH_USER_MODEL = 'users.User'
 
+LOGIN_URL = 'login'
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
