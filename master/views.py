@@ -42,7 +42,7 @@ class LogInPage(FormView):
     template_name = 'master/login.html'
     
     def get_success_url(self):
-        return self.request.GET.get('next', reverse('home'))
+        return self.request.GET.get('next', reverse('tenants'))
 
     def form_valid(self, form):
         login(self.request, form.get_user())
