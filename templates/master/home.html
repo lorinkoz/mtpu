@@ -23,5 +23,33 @@
             {% endif %}
         </p>
     </div>
+    <div class="col-md-4 col-md-offset-2">
+        <h2>
+            Acquire private space
+            <br><small>aka create tenant</small>
+        </h2>
+        <form method="post" action=".">
+            {% csrf_token %}
+            {{ form|as_crispy_errors }}
+            <div class="form-group">
+                <div class="input-group">
+                    <input class="form-control input-lg" type="text" name="subdomain" placeholder="whatever-you-want">
+                    <div class="input-group-addon"><h4 style="margin:0">{{ subdomain }}</h4></div>
+                </div>
+                {{ form.subdomain.errors }}
+            </div>
+            <button type="submit" class="btn btn-success btn-lg">
+                Go go go!
+            </button>
+        </form>
+        {% if request.session.success %}
+        <br/>
+        <div class="alert alert-success">
+            <b>Grab this and don't lose it!</b>
+            This is your key to become admin at {{ request.session.success.0|urlize }}<br/>
+            <code>{{ request.session.success.1 }}</code>
+        </div>
+        {% endif %}
+    </div>
 </div>
 {% endblock body %}

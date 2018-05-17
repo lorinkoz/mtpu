@@ -16,7 +16,7 @@
     <tbody>
         {% for tenant in object_list %}
         <tr>
-            <td>{{ tenant.schema_name }}</td>
+            <td>{{ tenant.schema_name|slice:"3:" }}</td>
             <td>{{ tenant.domains.first }}</td>
             <td/>
         </tr>
