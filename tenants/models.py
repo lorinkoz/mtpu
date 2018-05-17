@@ -11,17 +11,18 @@ class RegisteredUser(User):
 class StaffUser(User):
     
     enrollment_date = models.DateTimeField(auto_now_add=True)
-    is_admin = models.BooleanField(default=False)
-
-
-class SupportRole(models.Model):
-    
-    name = models.CharField(max_length=30)
 
 
 class SupportStaffUser(StaffUser):
     
-    role = models.ForeignKey(SupportRole, on_delete=models.PROTECT)
+    ROLES = (
+        (1, 'assistant'),
+        (2, 'bodyguard'),
+        (3, 'billing manager'),
+        (4, 'mentor'),
+    )
+    
+    role = models.PositiveIntegerField(choices=ROLES, default=1)
 
 
 class PrimaryStaffUser(StaffUser):

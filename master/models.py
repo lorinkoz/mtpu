@@ -40,6 +40,5 @@ class Domain(DomainMixin):
 
 
 class MasterUser(User):
-    
-    is_admin = models.BooleanField(default=False)
+    pass
     
