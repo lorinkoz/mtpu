@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load static %}
+{% block body %}
+<h1 class="page-header">
+    Hello!<br/>
+    <small>
+        You are at
+        <span class="text-danger">{{ request.tenant.domains.first }}</span>
+    </small>
+</h1>
+<div class="row">
+    <div class="col-md-5">
+        <p class="lead">
+            Now this is a <mark>private space</mark>, regular tenant!
+            Here you can sign up as three different types of users and then log in to see what's going on with the hierarchy.
+        </p>
+        <p>
+            <a href="{% url 'login' %}" class="btn btn-primary btn-lg" role="button">Log in</a>
+            {# <a href="{% url 'signup' %}" class="btn btn-primary btn-lg" role="button">Sign up</a> #}
+        </p>
+    </div>
+    <div class="col-md-6 col-md-offset-1">
+        <img src="{% static 'hierarchy.png' %}" style="max-width:450px">
+    </div>
+</div>
+{% endblock body %}
