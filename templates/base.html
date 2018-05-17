@@ -4,7 +4,7 @@
     <head>
         <title>MTPU</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="{% static 'bootstrap.min.css' %}" rel="stylesheet" type="text/css" />
+        <link href="{% static 'bootstrap/bootstrap.min.css' %}" rel="stylesheet" type="text/css" />
     </head>
     <body>
         <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -36,6 +36,6 @@
         <form id="logout-form" method="post" action="{% url 'logout' %}">
             {% csrf_token %}
         </form>
-        <script src="{% static 'bootstrap.min.js' %}"></script>
+        <script src="{% static 'bootstrap/bootstrap.min.js' %}"></script>
     </body>
 </html>
