@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load crispy_forms_filters %}
+{% block body %}
+<h2 class="page-header">
+    Log in at <span class="text-danger">{{ request.tenant.domains.first }}</span>
+    <br><small>Let's see what type of user you are</small>
+</h2>
+<form method="POST" action=".">
+    {% csrf_token %}
+    <div class="row">
+        <div class="col-md-4">
+            {{ form|crispy }}
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary btn-lg">
+        Log in
+    </button>
+</form>
+{% endblock body %}

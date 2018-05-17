@@ -14,10 +14,22 @@
             Now this is a <mark>private space</mark>, regular tenant!
             Here you can sign up as three different types of users and then log in to see what's going on with the hierarchy.
         </p>
-        <p>
-            <a href="{% url 'login' %}" class="btn btn-primary btn-lg" role="button">Log in</a>
-            {# <a href="{% url 'signup' %}" class="btn btn-primary btn-lg" role="button">Sign up</a> #}
-        </p>
+        <div class="btn-toolbar" role="toolbar">
+            <div class="btn-group">
+                <a href="{% url 'login' %}" class="btn btn-primary btn-lg" role="button">Log in</a>
+            </div>
+            <div class="btn-group">
+                <button type="button" class="btn btn-primary btn-lg dropdown-toggle" data-toggle="dropdown">
+                    Sign up
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a href="{% url 'signup' 'outsider' %}">Sign up as registered user</a></li>
+                    <li><a href="{% url 'signup' 'support' %}">Sign up as support staff</a></li>
+                    <li><a href="{% url 'signup' 'primary' %}">Sign up as primary staff</a></li>
+                </ul>
+            </div>
+        </div>
     </div>
     <div class="col-md-6 col-md-offset-1">
         <img src="{% static 'hierarchy.png' %}" style="max-width:450px">

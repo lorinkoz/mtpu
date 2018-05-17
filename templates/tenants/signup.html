@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load crispy_forms_filters %}
+{% block body %}
+<h2 class="page-header">
+    Sign up at <span class="text-danger">{{ request.tenant.domains.first }}</span>
+    <br>
+    <small>
+    {% if mode == 'primary' %}
+        You will be a <span class="label label-danger">primary staff user</span>
+    {% elif mode == 'support' %}
+        You will be a <span class="label label-warning">support staff user</span>
+    {% else %}
+        You will be a <span class="label label-info">plain registered user</span>
+    {% endif %}
+    </small>
+</h2>
+<form method="POST" action=".">
+    {% csrf_token %}
+    <div class="row">
+        <div class="col-md-4">
+            {{ form|crispy }}
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary btn-lg">
+        Sign up
+    </button>
+</form>
+{% endblock body %}
