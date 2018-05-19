@@ -17,7 +17,7 @@ class LogInPage(FormView):
     template_name = 'tenants/login.html'
     
     def get_success_url(self):
-        return self.request.GET.get('next', reverse('home'))
+        return self.request.GET.get('next', reverse('status'))
 
     def form_valid(self, form):
         login(self.request, form.get_user())
@@ -67,4 +67,16 @@ class SignUpPage(FormView):
     
     def get_context_data(self, **kwargs):
         kwargs.update({'mode': self.kwargs['mode']})
+        return super().get_context_data(**kwargs)
+
+
+class StatusPage(LoginRequiredMixin, TemplateView):
+    template_name = 'tenants/status.html'
+    
+    def get_context_data(self, **kwargs):
+        kwargs.update({'type': self.request.user._meta.verbose_name})
+        if isinstance(self.request.user, models.StaffUser):
+            kwargs.update({'registered': models.RegisteredUser.objects.all()})
+        if isinstance(self.request.user, models.PrimaryStaffUser):
+            kwargs.update({'staff': models.StaffUser.objects.all()})
         return super().get_context_data(**kwargs)

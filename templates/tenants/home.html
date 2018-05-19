@@ -29,6 +29,11 @@
                     <li><a href="{% url 'signup' 'primary' %}">Sign up as primary staff</a></li>
                 </ul>
             </div>
+            {% if request.user.is_authenticated %}
+            <div class="btn-group">
+                <a href="{% url 'status' %}" class="btn btn-default btn-lg" role="button">View status</a>
+            </div>
+            {% endif %}
         </div>
     </div>
     <div class="col-md-6 col-md-offset-1">
